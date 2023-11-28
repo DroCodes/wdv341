@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>WDV101 Basic Form Handler Example</title>
@@ -20,20 +21,8 @@
 <p>The <strong>Field Name</strong> column contains the value of the name attribute for each field on the form. <em>Example: &lt;input name=&quot;first_name&quot;&gt;</em>  This displays what you coded into the HTML. NOTE: If you do not have a name attribute for a field OR if the name attribute does not have a value the form will NOT send the data to the server.</p>
 <p>The <strong>Value of Field</strong> column contains the value of each field that was sent to the server by the form. This will vary depending upon the HTML form element and how the value attribute was used for a field.</p>
 <h3>Form Name-Value Pairs</h3>
+
 <?php
-
-//	echo "<table border='1'>";
-//	echo "<tr><th>Field Name</th><th>Value of Field</th></tr>";
-//	foreach($_POST as $key => $value)
-//	{
-//		echo '<tr>';
-//		echo '<td>',$key,'</td>';
-//		echo '<td>',$value,'</td>';
-//		echo "</tr>";
-//	}
-//	echo "</table>";
-//	echo "<p>&nbsp;</p>";
-
     $firstName = $_POST["first_name"];
     $academicStanding = $_POST["academic_standing"];
     $selectedMajor = $_POST["majors"];
@@ -41,27 +30,32 @@
     $checkBox1 = isset($_POST["contact-me"]) ? "Please contact me with program information" : "";
     $checkBox2 = isset($_POST["contact-you"]) ? "I would like to contact a program advisor" : "";
     $comments = $_POST["comments"];
+    $fakeField = $_POST["fake-field"];
+
+    if ($fakeField != "") {
+        echo "You are a robot";
+        exit();
+    } // end if
 
     $msg = "Dear $firstName ,
 
-Thank for you for your interest in DMACC. 
-<br><br>
-We have you listed as an $academicStanding starting this fall.
-<br><br>
-You have declared $selectedMajor as your major.
-<br><br>
-Based upon your responses we will provide the following information in our confirmation email to you at $emailAddress.
-<br><br>
-$checkBox1
-<br><br>
-$checkBox2
-<br><br>
-You have shared the following comments which we will review:
-<br><br>
-$comments";
+    Thank for you for your interest in DMACC. 
+    <br><br>
+    We have you listed as an $academicStanding starting this fall.
+    <br><br>
+    You have declared $selectedMajor as your major.
+    <br><br>
+    Based upon your responses we will provide the following information in our confirmation email to you at $emailAddress.
+    <br><br>
+    $checkBox1
+    <br><br>
+    $checkBox2
+    <br><br>
+    You have shared the following comments which we will review:
+    <br><br>
+    $comments";
 
-echo $msg;
-
+    echo $msg;
 ?>
 
 </body>
